@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title   %} Home {% endblock %}
+{% block content   %}
+<h1 align="center">Make a Post</h1>
+<form method="POST" enctype="multipart/form-data">
+    <textarea name="text" id="text" class="form-control"></textarea>
+    <br>
+    <div align="center">
+        <button class="btn btn-lg btn-primary" type="submit">Post</button>
+    </div>
+</form>
+<br>
+<div align="center">
+    <a href="/home"><button class="btn btn-lg btn-secondary" type="submit">Back</button></a>
+</div>
+{% endblock %}

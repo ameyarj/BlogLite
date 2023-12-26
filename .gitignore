@@ -1,0 +1,10 @@
+
+# Ignore unnecessary files and directories
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+venv/
+env/
+ENV/
+

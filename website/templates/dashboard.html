@@ -1,0 +1,55 @@
+
+{% extends "base.html" %}
+{% block title   %} Dashboard {% endblock %}
+{% block content   %}
+{% with messages = get_flashed_messages(with_categories=True) %} 
+    {% if messages %} 
+        {% for category,message in messages %} 
+        {% if category == "error" %}
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            {{message}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+        {% else %}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{message}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+        {% endif %}
+        {% endfor %}
+    {% endif %} 
+{% endwith %}
+<h1 align="center">Dashboard</h1>
+<br><br>
+
+<div class="card">
+    <div class="card-header">
+        {{ current_user.username }}
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">***Your Dashboard***</h5>
+      <p class="card-text">
+        <strong>Username: </strong>{{ current_user.username }}<br><br>
+        <strong>Email: </strong><br>{{ current_user.email }}<br>
+        <strong>User ID: </strong>{{ current_user.id }}<br><br>
+        <strong>Date Joined: </strong>{{ current_user.date_created }}<br><br>
+        <strong>Total Posts by you: </strong>{{ current_user.posts|length }}<br><br>
+        <strong>Total Posts you Liked: </strong>{{ current_user.post_liked|length }}<br><br>
+
+        <strong>Total Likes on your Posts: </strong>{{ likes }}<br><br>
+        <strong>Following: </strong>{{ followed_count }}<br><br>
+        <strong>Followers: </strong>{{ follower_count }}<br><br>
+        {% for follower in follower %}
+        <strong>Followers Username:</strong> <a href="/posts/{{ follower.username }}">{{ follower.username }}</a><br><br>
+        {% endfor %}
+        {% for followed in followed %}
+        <strong>Followed Username:</strong> <a href="/posts/{{ followed.username }}">{{ followed.username }}</a><br><br>
+        {% endfor %}    
+   
+      </p>
+      <a href="/home" class="btn btn-lg btn-secondary" type="submit">Back</button></a>
+      <a href="/edit_detail/{{ user.id }}" class="btn btn-lg btn-secondary" type="submit">Update</button></a>
+    </div>
+  </div>
+</div>
+{% endblock %}
